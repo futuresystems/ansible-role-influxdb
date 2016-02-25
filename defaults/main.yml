@@ -107,3 +107,7 @@ influxdb_continuous_queries_log_enabled = "true"
 influxdb_continuous_queries_enabled = "true"
 
 
+######################################################################
+# internal variables
+
+_influxdb_conf: /etc/influxdb/influxdb.conf
