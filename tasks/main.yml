@@ -24,8 +24,22 @@
     state: present
 
 
+- name: Install the service file (systemd)
+  when: ansible_os_family == 'RedHat'
+  file:
+    src: influxd.service
+    path: "{{ _influxdb_service_file }}"
+
+
 - name: Configure
   template:
     src: influxdb.conf.j2
     dest: "{{ _influxdb_conf }}"
     backup: yes
+  notify: restart influxdb
+
+
+- name: Enable influxd service on boot
+  service:
+    name: influxd
+    enabled: yes

@@ -1,5 +1,7 @@
 ---
 
+# influxdb configuration
+
 influxdb_reporting_disabled: "false"
 influxdb_hostname: localhost
 
@@ -111,3 +113,5 @@ influxdb_continuous_queries_enabled = "true"
 # internal variables
 
 _influxdb_conf: /etc/influxdb/influxdb.conf
+_influxdb_service_file_redhat: /usr/lib/systemd/system/influxdb.service
+_influxdb_service_file: "{{ _influxdb_service_file_redhat }}"
