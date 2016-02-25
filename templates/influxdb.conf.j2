@@ -33,7 +33,7 @@ reporting-disabled = {{ influxdb_reporting_disabled }}
   heartbeat-timeout = "{{ influxdb_meta_heartbeat_timeout }}"
   leader-lease-timeout = "{{ influxdb_meta_leader_lease_timeout }}"
   commit-timeout = "{{ influxdb_meta_commit_timeout }}"
-  cluster-tracing = "{{ influxdb_meta_cluster_tracing }}"
+  cluster-tracing = {{ influxdb_meta_cluster_tracing }}
 
 ###
 ### [data]
@@ -46,20 +46,20 @@ reporting-disabled = {{ influxdb_reporting_disabled }}
 
 [data]
   # Controls if this node holds time series data shards in the cluster
-  enabled = "{{ influxdb_data_enabled }}"
+  enabled = {{ influxdb_data_enabled }}
 
   dir = "{{ influxdb_data_dir }}"
 
   # The following WAL settings are for the b1 storage engine used in 0.9.2. They won't
   # apply to any new shards created after upgrading to a version > 0.9.3.
-  max-wal-size = "{{ influxdb_data_max_wal_size }}" # Maximum size the WAL can reach before a flush. Defaults to 100MB.
+  max-wal-size = {{ influxdb_data_max_wal_size }} # Maximum size the WAL can reach before a flush. Defaults to 100MB.
   wal-flush-interval = "{{ influxdb_data_wal_flush_interval }}" # Maximum time data can sit in WAL before a flush.
   wal-partition-flush-delay = "{{ influxdb_data_wal_partition_flush_delay }}" # The delay time between each WAL partition being flushed.
 
   # These are the WAL settings for the storage engine >= 0.9.3
-  wal_dir = "{{ influxdb_data_wal_dir }}"
-  wal_logging_enabled = "{{ influxdb_data_wal_logging_enabled }}"
-  data_logging_enabled = "{{ influxdb_data_data_logging_enabled }}"
+  wal-dir = "{{ influxdb_data_wal_dir }}"
+  wal-logging-enabled = {{ influxdb_data_wal_logging_enabled }}
+  data-logging-enabled = {{ influxdb_data_data_logging_enabled }}
 
   # When a series in the WAL in-memory cache reaches this size in bytes it is marked as ready to
   # flush to the index
@@ -123,11 +123,11 @@ reporting-disabled = {{ influxdb_reporting_disabled }}
 ###
 
 [hinted-handoff]
-  enabled = "{{ influxdb_hinted_handoff_enabled }}"
+  enabled = {{ influxdb_hinted_handoff_enabled }}
   dir = "{{ influxdb_hinted_handoff_dir }}"
-  max-size = "{{ influxdb_hinted_handoff_max_size }}"
+  max-size = {{ influxdb_hinted_handoff_max_size }}
   max-age = "{{ influxdb_hinted_handoff_max_age }}"
-  retry-rate-limit = "{{ influxdb_hinted_handoff_retry_rate_limit }}"
+  retry-rate-limit = {{ influxdb_hinted_handoff_retry_rate_limit }}
 
   # Hinted handoff will start retrying writes to down nodes at a rate of once per second.
   # If any error occurs, it will backoff in an exponential manner, until the interval
@@ -160,7 +160,7 @@ reporting-disabled = {{ influxdb_reporting_disabled }}
 ###
 
 [retention]
-  enabled = "{{ influxdb_retention_enabled }}"
+  enabled = {{ influxdb_retention_enabled }}
   check-interval = "{{ influxdb_retention_check_interval }}"
 
 ###
@@ -172,7 +172,7 @@ reporting-disabled = {{ influxdb_reporting_disabled }}
 ### or partially in the past.
 
 [shard-precreation]
-  enabled = "{{ influxdb_shard_precreation_enabled }}"
+  enabled = {{ influxdb_shard_precreation_enabled }}
   check-interval = "{{ influxdb_shard_precreation_check_interval }}"
   advance-period = "{{ influxdb_shard_precreation_advance_period }}"
 
@@ -186,7 +186,7 @@ reporting-disabled = {{ influxdb_reporting_disabled }}
 ### this retention policy is configured as the default for the database.
 
 [monitor]
-  store-enabled = "{{ influxdb_monitor_store_enabled }}" # Whether to record statistics internally.
+  store-enabled = {{ influxdb_monitor_store_enabled }} # Whether to record statistics internally.
   store-database = "{{ influxdb_monitor_store_database }}" # The destination database for recorded statistics
   store-interval = "{{ influxdb_monitor_store_interval }}" # The interval at which to record statistics
 
@@ -198,9 +198,9 @@ reporting-disabled = {{ influxdb_reporting_disabled }}
 ###
 
 [admin]
-  enabled = "{{ influxdb_admin_enabled }}"
+  enabled = {{ influxdb_admin_enabled }}
   bind-address = "{{ influxdb_admin_bind_address }}"
-  https-enabled = "{{ influxdb_admin_https_enabled }}"
+  https-enabled = {{ influxdb_admin_https_enabled }}
   https-certificate = "{{ influxdb_admin_https_certificate }}"
 
 ###
@@ -211,13 +211,13 @@ reporting-disabled = {{ influxdb_reporting_disabled }}
 ###
 
 [http]
-  enabled = "{{ influxdb_http_enabled }}"
+  enabled = {{ influxdb_http_enabled }}
   bind-address = "{{ influxdb_http_bind_address }}"
-  auth-enabled = "{{ influxdb_http_auth_enabled }}"
-  log-enabled = "{{ influxdb_http_log_enabled }}"
-  write-tracing = "{{ influxdb_http_write_tracing }}"
-  pprof-enabled = "{{ influxdb_http_pprof_enabled }}"
-  https-enabled = "{{ influxdb_http_https_enabled }}"
+  auth-enabled = {{ influxdb_http_auth_enabled }}
+  log-enabled = {{ influxdb_http_log_enabled }}
+  write-tracing = {{ influxdb_http_write_tracing }}
+  pprof-enabled = {{ influxdb_http_pprof_enabled }}
+  https-enabled = {{ influxdb_http_https_enabled }}
   https-certificate = "{{ influxdb_http_https_certificate }}"
 
 ###
@@ -227,7 +227,7 @@ reporting-disabled = {{ influxdb_reporting_disabled }}
 ###
 
 [[graphite]]
-  enabled = "{{ influxdb_graphite_enabled }}"
+  enabled = {{ influxdb_graphite_enabled }}
   {% if influxdb_graphite_enabled == 'true' %}
   database = "{{ influxdb_graphite_database }}"
   bind-address = "{{ influxdb_graphite_bind_address }}"
@@ -253,7 +253,7 @@ reporting-disabled = {{ influxdb_reporting_disabled }}
   ##     measurement: "cpu",
   ##     tags: {
   ##         "type": "server",
-  ##         "host": "localhost,
+  ##         "host": "localhost",
   ##         "device": "cpu0"
   ##     }
   ## }
@@ -321,22 +321,25 @@ reporting-disabled = {{ influxdb_reporting_disabled }}
 ###
 
 [[udp]]
-  enabled = false
-  # bind-address = ""
-  # database = "udp"
-  # retention-policy = ""
+  enabled = {{ influxdb_udp_enabled }}
+  {% if influxdb_udp_enabled == 'true' %}
+  bind-address = "{{ influxdb_udp_bind_address }}"
+  database = "{{ influxdb_udp_udp_database }}"
+  retention-policy = "{{ influxdb_udp_retention_policy }}"
 
   # These next lines control how batching works. You should have this enabled
   # otherwise you could get dropped metrics or poor performance. Batching
   # will buffer points in memory if you have many coming in.
 
-  # batch-size = 1000 # will flush if this many points get buffered
-  # batch-pending = 5 # number of batches that may be pending in memory
-  # batch-timeout = "1s" # will flush at least this often even if we haven't hit buffer limit
-  # read-buffer = 0 # UDP Read buffer size, 0 means OS default. UDP listener will fail if set above OS max.
+  batch-size = {{ influxdb_udp_batch_size }} # will flush if this many points get buffered
+  batch-pending = {{ influxdb_udp_batch_pending }} # number of batches that may be pending in memory
+  batch-timeout = "{{ influxdb_udp_batch_timeout }}" # will flush at least this often even if we haven't hit buffer limit
+  read-buffer = {{ influxdb_udp_read_buffer }}  # UDP Read buffer size, 0 means OS default. UDP listener will fail if set above OS max.
 
   # set the expected UDP payload size; lower values tend to yield better performance, default is max UDP size 65536
-  # udp-payload-size = 65536
+  udp-payload-size = {{ influxdb_udp_udp_payload_size }}
+  {% endif %}
+  
 
 ###
 ### [continuous_queries]
@@ -345,6 +348,6 @@ reporting-disabled = {{ influxdb_reporting_disabled }}
 ###
 
 [continuous_queries]
-  log-enabled = "{{ influxdb_continuous_queries_log_enabled }}"
-  enabled = "{{ influxdb_continuous_queries_enabled }}"
+  log-enabled = {{ influxdb_continuous_queries_log_enabled }}
+  enabled = {{ influxdb_continuous_queries_enabled }}
   # run-interval = "1s" # interval for how often continuous queries will be checked if they need to run
