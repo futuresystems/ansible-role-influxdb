@@ -105,8 +105,8 @@ influxdb_opentsdb_log_point_errors: true
 
 
 # [continuous_queries]
-influxdb_continuous_queries_log_enabled = "true"
-influxdb_continuous_queries_enabled = "true"
+influxdb_continuous_queries_log_enabled: "true"
+influxdb_continuous_queries_enabled: "true"
 
 
 ######################################################################

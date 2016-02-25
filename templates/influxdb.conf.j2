@@ -186,9 +186,9 @@ reporting-disabled = {{ influxdb_reporting_disabled }}
 ### this retention policy is configured as the default for the database.
 
 [monitor]
-  store-enabled = "{{ influxdb_monitor_store-enabled }}" # Whether to record statistics internally.
+  store-enabled = "{{ influxdb_monitor_store_enabled }}" # Whether to record statistics internally.
   store-database = "{{ influxdb_monitor_store_database }}" # The destination database for recorded statistics
-  store-interval = "{{ influxdb_monitor_store-interval }}" # The interval at which to record statistics
+  store-interval = "{{ influxdb_monitor_store_interval }}" # The interval at which to record statistics
 
 ###
 ### [admin]
@@ -199,9 +199,9 @@ reporting-disabled = {{ influxdb_reporting_disabled }}
 
 [admin]
   enabled = "{{ influxdb_admin_enabled }}"
-  bind-address = "{{ influxdb_admin_bind-address }}"
+  bind-address = "{{ influxdb_admin_bind_address }}"
   https-enabled = "{{ influxdb_admin_https_enabled }}"
-  https-certificate = "{{ influxdb_admin_https-certificate }}"
+  https-certificate = "{{ influxdb_admin_https_certificate }}"
 
 ###
 ### [http]
@@ -212,13 +212,13 @@ reporting-disabled = {{ influxdb_reporting_disabled }}
 
 [http]
   enabled = "{{ influxdb_http_enabled }}"
-  bind-address = "{{ influxdb_http_bind-address }}"
-  auth-enabled = "{{ influxdb_http_auth-enabled }}"
-  log-enabled = "{{ influxdb_http_logenabled }}"
-  write-tracing = "{{ influxdb_http_write-tracing }}"
-  pprof-enabled = "{{ influxdb_http_pprof-enabled }}"
-  https-enabled = "{{ influxdb_http_httpsenabled }}"
-  https-certificate = "{{ influxdb_http_https-certificate }}"
+  bind-address = "{{ influxdb_http_bind_address }}"
+  auth-enabled = "{{ influxdb_http_auth_enabled }}"
+  log-enabled = "{{ influxdb_http_log_enabled }}"
+  write-tracing = "{{ influxdb_http_write_tracing }}"
+  pprof-enabled = "{{ influxdb_http_pprof_enabled }}"
+  https-enabled = "{{ influxdb_http_https_enabled }}"
+  https-certificate = "{{ influxdb_http_https_certificate }}"
 
 ###
 ### [[graphite]]
