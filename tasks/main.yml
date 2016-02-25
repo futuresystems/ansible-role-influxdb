@@ -1,14 +1,15 @@
 ---
 
-- name: Install repository (RedHat)
-  when: ansible_os_family == 'RedHat'
-  yumrepo:
-    name: influxdb
-    description: Influxdb repository
-    baseurl: "https://repos.influxdata.com/rhel/$releasever/$basearch/stable"
-    enabled: yes
-    gpgcheck: yes
-    gpgkey: "https://repos.influxdata.com/influxdb.key"
+# only on ansible 2.1
+# - name: Install repository
+#   when: ansible_os_family == "RedHat"
+#   yumrepo:
+#     name: influxdb
+#     description: Influxdb repository
+#     baseurl: "https://repos.influxdata.com/rhel/$releasever/$basearch/stable"
+#     enabled: yes
+#     gpgcheck: yes
+#     gpgkey: "https://repos.influxdata.com/influxdb.key"
 
 
 - name: Install repository (Debian)
