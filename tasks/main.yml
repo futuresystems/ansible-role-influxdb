@@ -25,11 +25,11 @@
     state: present
 
 
-- name: Install the service file (systemd)
+- name: Install (RedHat)
   when: ansible_os_family == 'RedHat'
-  file:
-    src: influxd.service
-    path: "{{ _influxdb_service_file }}"
+  yum:
+    name: influxdb
+    state: present
 
 
 - name: Configure
